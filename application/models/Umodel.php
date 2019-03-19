@@ -55,6 +55,16 @@ class Umodel extends CI_Model {
 		return $qr->result_array();
     }
 
+    public function followby($id="null")
+    {
+        $this->db->select('*');
+		$this->db->from('hci_followers');
+        $this->db->where('hci_following',$id);
+		$qr = $this->db->get();
+		return $qr->result_array();
+    }
+
+
     public function get_verify($u="null",$p="null")
     {
       $this->db->select('*');

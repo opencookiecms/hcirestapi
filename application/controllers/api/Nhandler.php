@@ -23,9 +23,7 @@ class Nhandler extends REST_Controller {
         $details = [
             'note_title' => $this->post('title'),
             'note_content'=> $this->post('content'),
-            //'note_link' => $this->post('linked'),
-            //'note_type' => $this->post('typed'),
-            'note_userId'=> $this->post('userids')
+            'note_username'=> $this->post('username')
 
         ];
 

@@ -147,9 +147,13 @@ class Dhandler extends REST_Controller {
 
            ],REST_Controller::HTTP_BAD_REQUEST);
         }
-    }
+    }    
 
-    
+    public function follow_get($value="")
+    {
+        $notebyid = $this->Umodel->followby($value);
+        $this->set_response($notebyid,REST_Controller::HTTP_OK);
+    }
 
 }
 
