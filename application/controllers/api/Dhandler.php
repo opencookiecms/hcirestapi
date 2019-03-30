@@ -61,6 +61,9 @@ class Dhandler extends REST_Controller {
         {
             $users = $this->Umodel->getUsersbyid($username);
             $notes = $this->Nmodel->getNotebyid($username);
+            $countf = $this->Umodel->getFollowingbyid($username);
+            $countff = $this->Umodel->getFollowerbyid($username);
+            $notecount = $this->Nmodel->countNote($username);
             foreach ($users as $key => $vpost)
             {
                 $this->set_response([
@@ -68,8 +71,13 @@ class Dhandler extends REST_Controller {
                     'user_firtname' => $vpost['user_firstname'],
                     'user_lastname' => $vpost['user_lastname'],
                     'user_email' =>$vpost['user_email'],
+                    'user_username'=>$vpost['user_username'],
+                    'user_password'=>$vpost['user_password'],
                     'notes'=>$notes,
-                    'ff' =>'this is folloer section array'
+                    'follower'=>$countff,
+                    'following'=>$countf,
+                    'notecount'=>$notecount
+                    
                 ],REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 
             }

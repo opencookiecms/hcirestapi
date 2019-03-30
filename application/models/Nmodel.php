@@ -29,6 +29,16 @@ class Nmodel extends CI_Model {
         return $qr->result_array();
     }
 
+    public function countNote($id)
+    {
+        $this->db->select('count(note_username) as notecount');
+        $this->db->from('hci_note');
+        $this->db->where('note_username',$id);
+
+        $qr = $this->db->get();
+        return $qr->result_array();
+    }
+
     public function regNote($data)
     {
         $this->db->insert('hci_note',$data);

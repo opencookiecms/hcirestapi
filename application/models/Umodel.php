@@ -55,6 +55,24 @@ class Umodel extends CI_Model {
 		return $qr->result_array();
     }
 
+    public function getFollowingbyid($id="null")
+    {
+        $this->db->select('count(hci_following) as followingcount');
+		$this->db->from('hci_followers');
+        $this->db->where('hci_following',$id);
+		$qr = $this->db->get();
+		return $qr->result_array();
+    }
+
+    public function getFollowerbyid($id="null")
+    {
+        $this->db->select('count(hci_follower) as followercount');
+		$this->db->from('hci_followers');
+        $this->db->where('hci_follower',$id);
+		$qr = $this->db->get();
+		return $qr->result_array();
+    }
+
     public function followby($id="null")
     {
         $this->db->select('*');
