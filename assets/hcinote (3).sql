@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2019 at 05:29 PM
+-- Generation Time: Apr 02, 2019 at 04:17 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -40,7 +40,8 @@ CREATE TABLE `hci_followers` (
 --
 
 INSERT INTO `hci_followers` (`hci_fid`, `hci_following`, `hci_follower`, `status`) VALUES
-(11, 'awangs', 'fatimah', 'ok');
+(15, 'izam', 'izyan', 'approve'),
+(16, 'izyan', 'izam', 'approve');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,8 @@ CREATE TABLE `hci_note` (
 --
 
 INSERT INTO `hci_note` (`note_id`, `note_title`, `note_content`, `note_link`, `note_type`, `note_username`, `note_reg`) VALUES
-(55, 'file ', 'this is file', 'Screenshot_20190313-225824_Hci1.jpg', '.jpg', 'awang', NULL);
+(1, 'my first note', 'this is my note', 'cv_new_edituu2.docx', '.docx', 'awang', NULL),
+(2, 'this is my first notr', 'note about something', 'cv_new_edituu3.docx', '.docx', 'izam', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,7 @@ CREATE TABLE `hci_users` (
   `user_email` varchar(150) DEFAULT NULL,
   `user_collage` varchar(255) DEFAULT NULL,
   `user_posititon` varchar(150) DEFAULT NULL,
-  `user_pic` text,
+  `user_pic` varchar(255) DEFAULT NULL,
   `user_caption` text,
   `user_reg` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -90,9 +92,13 @@ CREATE TABLE `hci_users` (
 --
 
 INSERT INTO `hci_users` (`user_id`, `user_firstname`, `user_lastname`, `user_username`, `user_password`, `user_email`, `user_collage`, `user_posititon`, `user_pic`, `user_caption`, `user_reg`) VALUES
-(1, 'Abu', 'Awang', 'awang', '1234', 'awang@gmail.com', 'UITM', 'Student', NULL, NULL, '2019-03-09 16:00:00'),
-(2, 'K', 'Keon', 'keon', '1234', 'keon@gmail.com', 'UITM', 'Student', NULL, 'nothing', NULL),
-(3, 'Siti', 'Fatimah', 'fatimah', '1234', 'fatimah@gmail.com', 'UTM', 'Lecture', NULL, 'nothing', NULL);
+(4, 'this is my namess', 'nizam', 'izam', '1234', 'image@gmail.com', 'UITM', 'Student', 'Screenshot_20190401-221113_EIF-Alarm.jpg', 'this is my status', NULL),
+(5, 'this is my namessssssssssssssssss', 'Zainab', 'zainab', '1234', 'zainab@gmail.com', 'UITM', 'Lecture', 'LX540S-PDP_Zoom_01.jpg', 'No caption', NULL),
+(6, 'Ahmad', 'Nizam', 'ahmad', '1234', 'ahmad@outlook.com', 'KPTM', 'Cikgu', NULL, 'No caption', NULL),
+(7, 'Willy', 'Cheng', 'willy', '1234', 'willy@h.com', 'UUM', 'Student', NULL, 'no caption', NULL),
+(8, 'Siti', 'Izyan', 'izyan', '1234', 'izyan@g.com', 'UUM', 'Student', NULL, NULL, NULL),
+(9, NULL, NULL, 'katira', '1234', 'katira@yahoo.com', NULL, NULL, NULL, NULL, NULL),
+(11, 'john lagend', NULL, 'john', 'john', 'john@gmail.com', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -124,19 +130,19 @@ ALTER TABLE `hci_users`
 -- AUTO_INCREMENT for table `hci_followers`
 --
 ALTER TABLE `hci_followers`
-  MODIFY `hci_fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `hci_fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `hci_note`
 --
 ALTER TABLE `hci_note`
-  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `note_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hci_users`
 --
 ALTER TABLE `hci_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

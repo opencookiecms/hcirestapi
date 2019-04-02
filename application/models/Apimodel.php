@@ -11,8 +11,13 @@ class Apimodel extends CI_Model {
         //Do your magic here
     }
 
-    public function getProfiles()
+    public function getall()
     {
+
+        $this->db->select('*');
+        $this->db->from('hci_users');
+        $qr = $this->db->get();
+        return $qr->result_array();
 
     }
 
@@ -36,15 +41,22 @@ class Apimodel extends CI_Model {
         return $qr->result_array();
     }
 
-    public function countfollows($id)
+    public function countfollowing($id)
     {
-        // $this->db->select('SUM(hci_following) as Following',$id,'SUM(hci_follower) as Follower',$id);
-        // $this->db->from('hci_followers');
-        // $this->db->where('hci_following',$id);
 
-        $sql = "SELECT SUM(hci_following = ?) as following ,SUM(hci_follower = ?) as follower FROM `hci_followers` WHERE hci_following = ? or hci_follower = ?";
 
-        $qr = $this->db->query($sql, array($id, $id,$id,$id));
+        $sql = "SELECT SUM(hci_following = ?) as following  FROM `hci_followers` WHERE hci_following = ? and `status` =?";
+
+        $qr = $this->db->query($sql, array($id, $id,'approve'));
+        return $qr->result_array();
+    }
+
+    public function countfollower($id)
+    {
+ 
+        $sql = "SELECT SUM(hci_follower = ?) as follower FROM `hci_followers` WHERE hci_follower = ? and `status` = ?";
+
+        $qr = $this->db->query($sql, array($id, $id,'approve'));
         return $qr->result_array();
     }
 
@@ -60,6 +72,56 @@ class Apimodel extends CI_Model {
         $this->db->insert('hci_note',$data);
         return $this->db->affected_rows();
     }
+
+    public function updateprofiles($data,$id)
+    {
+        $this->db->update('hci_users',$data,['user_username'=>$id] );
+        return $this->db->affected_rows();
+    }
+
+    public function thefollows($username)
+    {
+        $approve = "approve";
+        $this->db->select('hci_followers.hci_fid, hci_users.user_id,hci_users.user_firstname,hci_users.user_lastname,hci_users.user_username,hci_users.user_email,hci_users.user_collage,hci_users.user_posititon,hci_users.user_caption,hci_users.user_pic');
+        $this->db->from('hci_users');
+        $this->db->join('hci_followers','hci_followers.hci_follower = hci_users.user_username','left');
+        $this->db->where('hci_followers.hci_following',$username);
+        $this->db->where('hci_followers.status',$approve);
+
+
+        $qr = $this->db->get();
+        return $qr->result_array();
+    }
+
+    public function thefollowings($username)
+    {
+        $approve = "approve";
+        $this->db->select('hci_users.user_id, hci_followers.hci_fid ,hci_users.user_firstname,hci_users.user_lastname,hci_users.user_username,hci_users.user_email,hci_users.user_collage,hci_users.user_posititon,hci_users.user_caption,hci_users.user_pic');
+        $this->db->from('hci_users');
+        $this->db->join('hci_followers','hci_followers.hci_following = hci_users.user_username','left');
+        $this->db->where('hci_followers.hci_follower',$username);
+        $this->db->where('hci_followers.status',$approve);
+
+
+        $qr = $this->db->get();
+        return $qr->result_array();
+    }
+
+    public function therequest($username)
+    {
+        $approve = "request";
+        $this->db->select('hci_users.user_id, hci_followers.hci_fid ,hci_users.user_firstname,hci_users.user_lastname,hci_users.user_username,hci_users.user_email,hci_users.user_collage,hci_users.user_posititon,hci_users.user_caption,hci_users.user_pic');
+        $this->db->from('hci_users');
+        $this->db->join('hci_followers','hci_followers.hci_following = hci_users.user_username','left');
+        $this->db->where('hci_followers.hci_follower',$username);
+        $this->db->where('hci_followers.status',$approve);
+
+
+        $qr = $this->db->get();
+        return $qr->result_array();
+    }
+
+    
 
 
     
