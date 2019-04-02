@@ -11,11 +11,12 @@ class Apimodel extends CI_Model {
         //Do your magic here
     }
 
-    public function getall()
+    public function getall($id)
     {
 
         $this->db->select('*');
         $this->db->from('hci_users');
+        $this->db->where('user_username !=',$id);
         $qr = $this->db->get();
         return $qr->result_array();
 
@@ -119,6 +120,12 @@ class Apimodel extends CI_Model {
 
         $qr = $this->db->get();
         return $qr->result_array();
+    }
+
+    public function setapprove($data,$id)
+    {
+        $this->db->update('hci_followers',$data,['hci_fid'=>$id] );
+        return $this->db->affected_rows();
     }
 
     

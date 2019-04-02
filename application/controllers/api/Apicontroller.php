@@ -22,7 +22,8 @@ class Apicontroller extends REST_Controller {
             'user_username' => $this->post('username'),
             'user_email'=> $this->post('email'),
             'user_password' => $this->post('password'),
-            'user_firstname'=> $this->post('firstname')
+            'user_firstname'=> $this->post('firstname'),
+            'user_pic'=> $this->post('userpic')
         ];
 
         $userreg = $this->Umodel->createUsers($data);
@@ -85,9 +86,9 @@ class Apicontroller extends REST_Controller {
 
     }
 
-    public function alluser_get()
+    public function alluser_get($value="")
     {
-        $getall= $this->Apimodel->getall();
+        $getall= $this->Apimodel->getall($value);
         $this->set_response($getall,REST_Controller::HTTP_OK); 
     }
 
@@ -228,6 +229,58 @@ class Apicontroller extends REST_Controller {
     {
         $flws= $this->Apimodel->therequest($value);
         $this->set_response($flws,REST_Controller::HTTP_OK);
+    }
+
+    public function follow_post()
+    {
+        $data = [
+            'hci_following' => $this->post('following'),
+            'hci_follower'=> $this->post('follower'),
+            'status' => $this->post('status')
+        ];
+
+        $userreg = $this->Umodel->createFollow($data);
+        if($userreg > 0 )
+        {
+            $this->response([
+                'status'=> true,
+                'message'=> 'new succesfully insert'
+
+           ],REST_Controller::HTTP_CREATED);
+        }
+        else
+        {
+            $this->response([
+                'status'=> false,
+                'message'=> 'there is no data was insert'
+
+           ],REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function setapprove_post($value="")
+    {
+        $data = [
+            'status' => $this->post('status')
+        ];
+
+        $userreg = $this->Apimodel->setapprove($data,$value);
+        if($userreg > 0 )
+        {
+            $this->response([
+                'status'=> true,
+                'message'=> 'new succesfully insert'
+
+           ],REST_Controller::HTTP_CREATED);
+        }
+        else
+        {
+            $this->response([
+                'status'=> false,
+                'message'=> 'there is no data was insert'
+
+           ],REST_Controller::HTTP_BAD_REQUEST);
+        }
     }
 
 }
