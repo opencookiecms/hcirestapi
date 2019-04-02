@@ -283,6 +283,31 @@ class Apicontroller extends REST_Controller {
         }
     }
 
+    public function notedelete_post()
+    {
+       
+            $value= $this->post('noteid');
+       
+       
+        $userreg = $this->Apimodel->deletenote($value);
+        if($userreg > 0 )
+        {
+            $this->response([
+                'status'=> true,
+                'message'=> 'delete'
+
+           ],REST_Controller::HTTP_OK);
+        }
+        else
+        {
+            $this->response([
+                'status'=> false,
+                'message'=> 'no data was delete'
+
+           ],REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
 }
 
 /* End of file Controllername.php */

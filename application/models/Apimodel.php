@@ -128,6 +128,12 @@ class Apimodel extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function deletenote($id)
+    {
+        $this->db->delete('hci_note', ['note_id' => $id]);
+        return $this->db->affected_rows();
+    }
+
     
 
 
